@@ -28,6 +28,8 @@ To generate dictionary you need two files:
 - AVP descriptions in CSV format
 - descriptions of commands, grouped AVPs, enumerated AVPs in BNF-like notation
 
+Look in [test-data](./test-data) directory for examples.
+
 ### CSV file
 
 CSV file format follows common for 3GPP and IETF tabular format for AVPs
