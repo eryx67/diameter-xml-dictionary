@@ -7,6 +7,15 @@ Dictionary](https://tools.ietf.org/html/draft-frascone-xml-dictionary-00
 for [Diameter Protocol](https://en.wikipedia.org/wiki/Diameter_(protocol))
 dictionaries from 3GPP or IETF documents.
 
+## Install
+
+You need [Stack](https://docs.haskellstack.org/en/stable/README/) to
+be installed locally.
+
+```
+stack install
+```
+
 ## Usage
 
 Generating XML Example:
