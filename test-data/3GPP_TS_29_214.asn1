@@ -1,0 +1,902 @@
+3GPP-29-214 DEFINITIONS IMPLICIT TAGS ::= BEGIN
+ EXPORTS
+          Abort-Cause
+          ,Access-Network-Charging-Address
+          ,Access-Network-Charging-Identifier
+          ,Access-Network-Charging-Identifier-Value
+          ,Acceptable-Service-Info
+          ,AF-Application-Identifier
+          ,AF-Charging-Identifier
+          ,AF-Requested-Data
+          ,AF-Signalling-Protocol
+          ,Application-Service-Provider-Identity
+          ,Pre-emption-Control-Info
+          ,Codec-Data
+          ,Content-Version
+          ,Flow-Description
+          ,Flow-Number
+          ,Flows
+          ,Flow-Status
+          ,Flow-Usage
+          ,GCS-Identifier
+          ,IP-Domain-Id
+          ,Max-Requested-Bandwidth-DL
+          ,Max-Requested-Bandwidth-UL
+          ,Max-Supported-Bandwidth-DL
+          ,Max-Supported-Bandwidth-UL
+          ,MCPTT-Identifier
+          ,Media-Component-Description
+          ,Media-Component-Number
+          ,Media-Component-Status
+          ,Media-Sub-Component
+          ,Media-Type
+          ,MPS-Identifier
+          ,Min-Desired-Bandwidth-DL
+          ,Min-Desired-Bandwidth-UL
+          ,Min-Requested-Bandwidth-DL
+          ,Min-Requested-Bandwidth-UL
+          ,Priority-Sharing-Indicator
+          ,RR-Bandwidth
+          ,RS-Bandwidth
+          ,Service-Authorization-Info
+          ,Service-URN
+          ,Service-Info-Status
+          ,Sharing-Key-DL
+          ,Sharing-Key-UL
+          ,Specific-Action
+          ,SIP-Forking-Indication
+          ,Sponsor-Identity
+          ,Sponsored-Connectivity-Data
+          ,Retry-Interval
+          ,Sponsoring-Action
+          ,Required-Access-Info
+          ,Rx-Request-Type
+          ,Extended-Max-Requested-BW-DL
+          ,Extended-Max-Requested-BW-UL
+          ,AS-Answer
+          ,AS-Request
+          ,ST-Answer
+          ,ST-Request
+          ,RA-Answer
+          ,RA-Request
+          ,AA-Answer
+          ,AA-Request
+     ;
+
+ IMPORTS
+  
+          AN-Trusted
+      FROM ThreeGPP-29-273
+ 
+
+  
+          Supported-Features
+      FROM ThreeGPP-29-229
+ 
+
+  
+          AN-GW-Address
+          ,IP-CAN-Type
+          ,NetLoc-Access-Support
+          ,Pre-emption-Capability
+          ,Pre-emption-Vulnerability
+          ,RAN-NAS-Release-Cause
+          ,RAT-Type
+          ,TCP-Source-Port
+          ,ToS-Traffic-Class
+          ,UDP-Source-Port
+          ,UE-Local-IP-Address
+          ,User-Location-Info-Time
+      FROM ThreeGPP-29-212
+ 
+
+  
+          Reference-Id
+      FROM ThreeGPP-29-154
+ 
+
+  
+          3GPP-MS-TimeZone
+          ,3GPP-SGSN-MCC-MNC
+          ,3GPP-User-Location-Info
+          ,TWAN-Identifier
+      FROM ThreeGPP-29-061
+ 
+
+  
+          Reservation-Priority
+      FROM ThreeGPP-183-017
+ 
+
+  
+          DRMP
+      FROM Rfc-7944
+ 
+
+  
+          OC-OLR
+          ,OC-Supported-Features
+      FROM Rfc-7683
+ 
+
+  
+          Final-Unit-Action
+          ,Granted-Service-Unit
+          ,Subscription-Id
+          ,Used-Service-Unit
+          ,User-Equipment-Info
+      FROM Rfc-4006
+ 
+
+  
+          Called-Station-Id
+          ,Framed-IP-Address
+          ,Framed-Ipv6-Prefix
+      FROM Rfc-4005
+ 
+
+  
+          Load
+      FROM Dime-load-03
+ 
+
+ ;
+
+  Abort-Cause ::= [UNIVERSAL 500] SEQUENCE {
+ avpFlags AVP-Flags DEFAULT {v_bit TRUE, m_bit TRUE, p_bit FALSE},
+  vendorId Vendor-ID DEFAULT 10415,
+  data     ENUMERATED {
+         bearer_released (0)
+        , insufficient_bearer_resources (2)
+        , insufficient_server_resources (1)
+        , ps_to_cs_handover (3)
+        , sponsored_data_connectivity_disallowed (4)
+        }
+ }
+
+ Access-Network-Charging-Address ::= [UNIVERSAL 501] SEQUENCE {
+ avpFlags AVP-Flags DEFAULT {v_bit TRUE, m_bit TRUE, p_bit FALSE},
+  vendorId Vendor-ID DEFAULT 10415,
+  data     Address
+ }
+
+ Access-Network-Charging-Identifier ::= [UNIVERSAL 502] SEQUENCE {
+ avpFlags AVP-Flags DEFAULT {v_bit TRUE, m_bit TRUE, p_bit FALSE},
+  vendorId Vendor-ID DEFAULT 10415,
+  data     SEQUENCE {
+    
+   required [1] SET {
+  access_Network_Charging_Identifier_Value Access-Network-Charging-Identifier-Value
+  }
+ , optional [2] SET {
+  flows SET OF Flows  OPTIONAL
+  }
+ 
+    }
+    
+ }
+
+ Access-Network-Charging-Identifier-Value ::= [UNIVERSAL 503] SEQUENCE {
+ avpFlags AVP-Flags DEFAULT {v_bit TRUE, m_bit TRUE, p_bit FALSE},
+  vendorId Vendor-ID DEFAULT 10415,
+  data     OctetString
+ }
+
+ Acceptable-Service-Info ::= [UNIVERSAL 526] SEQUENCE {
+ avpFlags AVP-Flags DEFAULT {v_bit TRUE, m_bit TRUE, p_bit FALSE},
+  vendorId Vendor-ID DEFAULT 10415,
+  data     SEQUENCE {
+    
+  optional [2] SET {
+  media_Component_Description SET OF Media-Component-Description  OPTIONAL
+  ,max_Requested_Bandwidth_DL Max-Requested-Bandwidth-DL OPTIONAL
+  ,max_Requested_Bandwidth_UL Max-Requested-Bandwidth-UL OPTIONAL
+  }
+ 
+    }
+    
+ }
+
+ AF-Application-Identifier ::= [UNIVERSAL 504] SEQUENCE {
+ avpFlags AVP-Flags DEFAULT {v_bit TRUE, m_bit TRUE, p_bit FALSE},
+  vendorId Vendor-ID DEFAULT 10415,
+  data     OctetString
+ }
+
+ AF-Charging-Identifier ::= [UNIVERSAL 505] SEQUENCE {
+ avpFlags AVP-Flags DEFAULT {v_bit TRUE, m_bit TRUE, p_bit FALSE},
+  vendorId Vendor-ID DEFAULT 10415,
+  data     OctetString
+ }
+
+ AF-Requested-Data ::= [UNIVERSAL 551] SEQUENCE {
+ avpFlags AVP-Flags DEFAULT {v_bit TRUE, m_bit FALSE, p_bit FALSE},
+  vendorId Vendor-ID DEFAULT 10415,
+  data     Unsigned32
+ }
+
+ AF-Signalling-Protocol ::= [UNIVERSAL 529] SEQUENCE {
+ avpFlags AVP-Flags DEFAULT {v_bit TRUE, m_bit FALSE, p_bit FALSE},
+  vendorId Vendor-ID DEFAULT 10415,
+  data     ENUMERATED {
+         no_information (0)
+        , sip (1)
+        }
+ }
+
+ Application-Service-Provider-Identity ::= [UNIVERSAL 532] SEQUENCE {
+ avpFlags AVP-Flags DEFAULT {v_bit TRUE, m_bit FALSE, p_bit FALSE},
+  vendorId Vendor-ID DEFAULT 10415,
+  data     UTF8String
+ }
+
+ Pre-emption-Control-Info ::= [UNIVERSAL 553] SEQUENCE {
+ avpFlags AVP-Flags DEFAULT {v_bit TRUE, m_bit FALSE, p_bit FALSE},
+  vendorId Vendor-ID DEFAULT 10415,
+  data     Unsigned32
+ }
+
+ Codec-Data ::= [UNIVERSAL 524] SEQUENCE {
+ avpFlags AVP-Flags DEFAULT {v_bit TRUE, m_bit TRUE, p_bit FALSE},
+  vendorId Vendor-ID DEFAULT 10415,
+  data     OctetString
+ }
+
+ Content-Version ::= [UNIVERSAL 552] SEQUENCE {
+ avpFlags AVP-Flags DEFAULT {v_bit TRUE, m_bit FALSE, p_bit FALSE},
+  vendorId Vendor-ID DEFAULT 10415,
+  data     Unsigned64
+ }
+
+ Flow-Description ::= [UNIVERSAL 507] SEQUENCE {
+ avpFlags AVP-Flags DEFAULT {v_bit TRUE, m_bit TRUE, p_bit FALSE},
+  vendorId Vendor-ID DEFAULT 10415,
+  data     IPFilterRule
+ }
+
+ Flow-Number ::= [UNIVERSAL 509] SEQUENCE {
+ avpFlags AVP-Flags DEFAULT {v_bit TRUE, m_bit TRUE, p_bit FALSE},
+  vendorId Vendor-ID DEFAULT 10415,
+  data     Unsigned32
+ }
+
+ Flows ::= [UNIVERSAL 510] SEQUENCE {
+ avpFlags AVP-Flags DEFAULT {v_bit TRUE, m_bit TRUE, p_bit FALSE},
+  vendorId Vendor-ID DEFAULT 10415,
+  data     SEQUENCE {
+    
+   required [1] SET {
+  media_Component_Number Media-Component-Number
+  }
+ , optional [2] SET {
+  flow_Number SET OF Flow-Number  OPTIONAL
+  ,content_Version SET OF Content-Version  OPTIONAL
+  ,final_Unit_Action Final-Unit-Action OPTIONAL
+  ,media_Component_Status Media-Component-Status OPTIONAL
+  }
+ 
+    }
+    
+ }
+
+ Flow-Status ::= [UNIVERSAL 511] SEQUENCE {
+ avpFlags AVP-Flags DEFAULT {v_bit TRUE, m_bit TRUE, p_bit FALSE},
+  vendorId Vendor-ID DEFAULT 10415,
+  data     ENUMERATED {
+         disabled (3)
+        , enabled (2)
+        , enabled_downlink (1)
+        , enabled_uplink (0)
+        , removed (4)
+        }
+ }
+
+ Flow-Usage ::= [UNIVERSAL 512] SEQUENCE {
+ avpFlags AVP-Flags DEFAULT {v_bit TRUE, m_bit TRUE, p_bit FALSE},
+  vendorId Vendor-ID DEFAULT 10415,
+  data     ENUMERATED {
+         af_signalling (2)
+        , no_information (0)
+        , rtcp (1)
+        }
+ }
+
+ GCS-Identifier ::= [UNIVERSAL 538] SEQUENCE {
+ avpFlags AVP-Flags DEFAULT {v_bit TRUE, m_bit FALSE, p_bit FALSE},
+  vendorId Vendor-ID DEFAULT 10415,
+  data     OctetString
+ }
+
+ IP-Domain-Id ::= [UNIVERSAL 537] SEQUENCE {
+ avpFlags AVP-Flags DEFAULT {v_bit TRUE, m_bit FALSE, p_bit FALSE},
+  vendorId Vendor-ID DEFAULT 10415,
+  data     OctetString
+ }
+
+ Max-Requested-Bandwidth-DL ::= [UNIVERSAL 515] SEQUENCE {
+ avpFlags AVP-Flags DEFAULT {v_bit TRUE, m_bit TRUE, p_bit FALSE},
+  vendorId Vendor-ID DEFAULT 10415,
+  data     Unsigned32
+ }
+
+ Max-Requested-Bandwidth-UL ::= [UNIVERSAL 516] SEQUENCE {
+ avpFlags AVP-Flags DEFAULT {v_bit TRUE, m_bit TRUE, p_bit FALSE},
+  vendorId Vendor-ID DEFAULT 10415,
+  data     Unsigned32
+ }
+
+ Max-Supported-Bandwidth-DL ::= [UNIVERSAL 543] SEQUENCE {
+ avpFlags AVP-Flags DEFAULT {v_bit TRUE, m_bit FALSE, p_bit FALSE},
+  vendorId Vendor-ID DEFAULT 10415,
+  data     Unsigned32
+ }
+
+ Max-Supported-Bandwidth-UL ::= [UNIVERSAL 544] SEQUENCE {
+ avpFlags AVP-Flags DEFAULT {v_bit TRUE, m_bit FALSE, p_bit FALSE},
+  vendorId Vendor-ID DEFAULT 10415,
+  data     Unsigned32
+ }
+
+ MCPTT-Identifier ::= [UNIVERSAL 547] SEQUENCE {
+ avpFlags AVP-Flags DEFAULT {v_bit TRUE, m_bit FALSE, p_bit FALSE},
+  vendorId Vendor-ID DEFAULT 10415,
+  data     OctetString
+ }
+
+ Media-Component-Description ::= [UNIVERSAL 517] SEQUENCE {
+ avpFlags AVP-Flags DEFAULT {v_bit TRUE, m_bit TRUE, p_bit FALSE},
+  vendorId Vendor-ID DEFAULT 10415,
+  data     SEQUENCE {
+    
+   required [1] SET {
+  media_Component_Number Media-Component-Number
+  }
+ , optional [2] SET {
+  media_Sub_Component SET OF Media-Sub-Component  OPTIONAL
+  ,aF_Application_Identifier AF-Application-Identifier OPTIONAL
+  ,media_Type Media-Type OPTIONAL
+  ,max_Requested_Bandwidth_UL Max-Requested-Bandwidth-UL OPTIONAL
+  ,max_Requested_Bandwidth_DL Max-Requested-Bandwidth-DL OPTIONAL
+  ,max_Supported_Bandwidth_UL Max-Supported-Bandwidth-UL OPTIONAL
+  ,max_Supported_Bandwidth_DL Max-Supported-Bandwidth-DL OPTIONAL
+  ,min_Desired_Bandwidth_UL Min-Desired-Bandwidth-UL OPTIONAL
+  ,min_Desired_Bandwidth_DL Min-Desired-Bandwidth-DL OPTIONAL
+  ,min_Requested_Bandwidth_UL Min-Requested-Bandwidth-UL OPTIONAL
+  ,min_Requested_Bandwidth_DL Min-Requested-Bandwidth-DL OPTIONAL
+  ,flow_Status Flow-Status OPTIONAL
+  ,priority_Sharing_Indicator Priority-Sharing-Indicator OPTIONAL
+  ,pre_emption_Capability Pre-emption-Capability OPTIONAL
+  ,pre_emption_Vulnerability Pre-emption-Vulnerability OPTIONAL
+  ,reservation_Priority Reservation-Priority OPTIONAL
+  ,rS_Bandwidth RS-Bandwidth OPTIONAL
+  ,rR_Bandwidth RR-Bandwidth OPTIONAL
+  ,codec_Data SET OF Codec-Data  OPTIONAL
+  ,sharing_Key_DL Sharing-Key-DL OPTIONAL
+  ,sharing_Key_UL Sharing-Key-UL OPTIONAL
+  ,content_Version Content-Version OPTIONAL
+  }
+ 
+    }
+    
+ }
+
+ Media-Component-Number ::= [UNIVERSAL 518] SEQUENCE {
+ avpFlags AVP-Flags DEFAULT {v_bit TRUE, m_bit TRUE, p_bit FALSE},
+  vendorId Vendor-ID DEFAULT 10415,
+  data     Unsigned32
+ }
+
+ Media-Component-Status ::= [UNIVERSAL 549] SEQUENCE {
+ avpFlags AVP-Flags DEFAULT {v_bit TRUE, m_bit FALSE, p_bit FALSE},
+  vendorId Vendor-ID DEFAULT 10415,
+  data     ENUMERATED {
+         active (0)
+        , inactive (1)
+        }
+ }
+
+ Media-Sub-Component ::= [UNIVERSAL 519] SEQUENCE {
+ avpFlags AVP-Flags DEFAULT {v_bit TRUE, m_bit TRUE, p_bit FALSE},
+  vendorId Vendor-ID DEFAULT 10415,
+  data     SEQUENCE {
+    
+   required [1] SET {
+  flow_Number Flow-Number
+  }
+ , optional [2] SET {
+  flow_Description SET (SIZE (0..2)) OF Flow-Description  OPTIONAL
+  ,flow_Status Flow-Status OPTIONAL
+  ,flow_Usage Flow-Usage OPTIONAL
+  ,max_Requested_Bandwidth_UL Max-Requested-Bandwidth-UL OPTIONAL
+  ,max_Requested_Bandwidth_DL Max-Requested-Bandwidth-DL OPTIONAL
+  ,aF_Signalling_Protocol AF-Signalling-Protocol OPTIONAL
+  ,toS_Traffic_Class ToS-Traffic-Class OPTIONAL
+  }
+ 
+    }
+    
+ }
+
+ Media-Type ::= [UNIVERSAL 520] SEQUENCE {
+ avpFlags AVP-Flags DEFAULT {v_bit TRUE, m_bit TRUE, p_bit FALSE},
+  vendorId Vendor-ID DEFAULT 10415,
+  data     ENUMERATED {
+         application (3)
+        , audio (0)
+        , control (4)
+        , data (2)
+        , message (6)
+        , other (7)
+        , text (5)
+        , video (1)
+        }
+ }
+
+ MPS-Identifier ::= [UNIVERSAL 528] SEQUENCE {
+ avpFlags AVP-Flags DEFAULT {v_bit TRUE, m_bit FALSE, p_bit FALSE},
+  vendorId Vendor-ID DEFAULT 10415,
+  data     OctetString
+ }
+
+ Min-Desired-Bandwidth-DL ::= [UNIVERSAL 545] SEQUENCE {
+ avpFlags AVP-Flags DEFAULT {v_bit TRUE, m_bit FALSE, p_bit FALSE},
+  vendorId Vendor-ID DEFAULT 10415,
+  data     Unsigned32
+ }
+
+ Min-Desired-Bandwidth-UL ::= [UNIVERSAL 546] SEQUENCE {
+ avpFlags AVP-Flags DEFAULT {v_bit TRUE, m_bit FALSE, p_bit FALSE},
+  vendorId Vendor-ID DEFAULT 10415,
+  data     Unsigned32
+ }
+
+ Min-Requested-Bandwidth-DL ::= [UNIVERSAL 534] SEQUENCE {
+ avpFlags AVP-Flags DEFAULT {v_bit TRUE, m_bit FALSE, p_bit FALSE},
+  vendorId Vendor-ID DEFAULT 10415,
+  data     Unsigned32
+ }
+
+ Min-Requested-Bandwidth-UL ::= [UNIVERSAL 535] SEQUENCE {
+ avpFlags AVP-Flags DEFAULT {v_bit TRUE, m_bit FALSE, p_bit FALSE},
+  vendorId Vendor-ID DEFAULT 10415,
+  data     Unsigned32
+ }
+
+ Priority-Sharing-Indicator ::= [UNIVERSAL 550] SEQUENCE {
+ avpFlags AVP-Flags DEFAULT {v_bit TRUE, m_bit FALSE, p_bit FALSE},
+  vendorId Vendor-ID DEFAULT 10415,
+  data     ENUMERATED {
+         priority_sharing_disabled (1)
+        , priority_sharing_enabled (0)
+        }
+ }
+
+ RR-Bandwidth ::= [UNIVERSAL 521] SEQUENCE {
+ avpFlags AVP-Flags DEFAULT {v_bit TRUE, m_bit TRUE, p_bit FALSE},
+  vendorId Vendor-ID DEFAULT 10415,
+  data     Unsigned32
+ }
+
+ RS-Bandwidth ::= [UNIVERSAL 522] SEQUENCE {
+ avpFlags AVP-Flags DEFAULT {v_bit TRUE, m_bit TRUE, p_bit FALSE},
+  vendorId Vendor-ID DEFAULT 10415,
+  data     Unsigned32
+ }
+
+ Service-Authorization-Info ::= [UNIVERSAL 548] SEQUENCE {
+ avpFlags AVP-Flags DEFAULT {v_bit TRUE, m_bit FALSE, p_bit FALSE},
+  vendorId Vendor-ID DEFAULT 10415,
+  data     Unsigned32
+ }
+
+ Service-URN ::= [UNIVERSAL 525] SEQUENCE {
+ avpFlags AVP-Flags DEFAULT {v_bit TRUE, m_bit TRUE, p_bit FALSE},
+  vendorId Vendor-ID DEFAULT 10415,
+  data     OctetString
+ }
+
+ Service-Info-Status ::= [UNIVERSAL 527] SEQUENCE {
+ avpFlags AVP-Flags DEFAULT {v_bit TRUE, m_bit TRUE, p_bit FALSE},
+  vendorId Vendor-ID DEFAULT 10415,
+  data     ENUMERATED {
+         final_service_information (0)
+        , preliminary_service_information (1)
+        }
+ }
+
+ Sharing-Key-DL ::= [UNIVERSAL 539] SEQUENCE {
+ avpFlags AVP-Flags DEFAULT {v_bit TRUE, m_bit FALSE, p_bit FALSE},
+  vendorId Vendor-ID DEFAULT 10415,
+  data     Unsigned32
+ }
+
+ Sharing-Key-UL ::= [UNIVERSAL 540] SEQUENCE {
+ avpFlags AVP-Flags DEFAULT {v_bit TRUE, m_bit FALSE, p_bit FALSE},
+  vendorId Vendor-ID DEFAULT 10415,
+  data     Unsigned32
+ }
+
+ Specific-Action ::= [UNIVERSAL 513] SEQUENCE {
+ avpFlags AVP-Flags DEFAULT {v_bit TRUE, m_bit TRUE, p_bit FALSE},
+  vendorId Vendor-ID DEFAULT 10415,
+  data     ENUMERATED {
+         access_network_info_report (12)
+        , charging_correlation_exchange (1)
+        , indication_of_access_network_info_reporting_failure (14)
+        , indication_of_failed_resources_allocation (9)
+        , indication_of_limited_pcc_deployment (10)
+        , indication_of_loss_of_bearer (2)
+        , indication_of_out_of_credit (7)
+        , indication_of_recovery_from_limited_pcc_deployment (13)
+        , indication_of_recovery_of_bearer (3)
+        , indication_of_release_of_bearer (4)
+        , indication_of_successful_resources_allocation (8)
+        , indication_of_transfer_policy_expired (15)
+        , ip_can_change (6)
+        , plmn_change (16)
+        , usage_report (11)
+        , void_0 (0)
+        , void_5 (5)
+        }
+ }
+
+ SIP-Forking-Indication ::= [UNIVERSAL 523] SEQUENCE {
+ avpFlags AVP-Flags DEFAULT {v_bit TRUE, m_bit TRUE, p_bit FALSE},
+  vendorId Vendor-ID DEFAULT 10415,
+  data     ENUMERATED {
+         several_dialogues (1)
+        , single_dialogue (0)
+        }
+ }
+
+ Sponsor-Identity ::= [UNIVERSAL 531] SEQUENCE {
+ avpFlags AVP-Flags DEFAULT {v_bit TRUE, m_bit FALSE, p_bit FALSE},
+  vendorId Vendor-ID DEFAULT 10415,
+  data     UTF8String
+ }
+
+ Sponsored-Connectivity-Data ::= [UNIVERSAL 530] SEQUENCE {
+ avpFlags AVP-Flags DEFAULT {v_bit TRUE, m_bit FALSE, p_bit FALSE},
+  vendorId Vendor-ID DEFAULT 10415,
+  data     SEQUENCE {
+    
+  optional [2] SET {
+  sponsor_Identity Sponsor-Identity OPTIONAL
+  ,application_Service_Provider_Identity Application-Service-Provider-Identity OPTIONAL
+  ,granted_Service_Unit Granted-Service-Unit OPTIONAL
+  ,used_Service_Unit Used-Service-Unit OPTIONAL
+  ,sponsoring_Action Sponsoring-Action OPTIONAL
+  }
+ 
+    }
+    
+ }
+
+ Retry-Interval ::= [UNIVERSAL 541] SEQUENCE {
+ avpFlags AVP-Flags DEFAULT {v_bit TRUE, m_bit FALSE, p_bit FALSE},
+  vendorId Vendor-ID DEFAULT 10415,
+  data     Unsigned32
+ }
+
+ Sponsoring-Action ::= [UNIVERSAL 542] SEQUENCE {
+ avpFlags AVP-Flags DEFAULT {v_bit TRUE, m_bit FALSE, p_bit FALSE},
+  vendorId Vendor-ID DEFAULT 10415,
+  data     ENUMERATED {
+         disable_sponsoring (0)
+        , enable_sponsoring (1)
+        }
+ }
+
+ Required-Access-Info ::= [UNIVERSAL 536] SEQUENCE {
+ avpFlags AVP-Flags DEFAULT {v_bit TRUE, m_bit FALSE, p_bit FALSE},
+  vendorId Vendor-ID DEFAULT 10415,
+  data     ENUMERATED {
+         ms_time_zone (1)
+        , user_location (0)
+        }
+ }
+
+ Rx-Request-Type ::= [UNIVERSAL 533] SEQUENCE {
+ avpFlags AVP-Flags DEFAULT {v_bit TRUE, m_bit FALSE, p_bit FALSE},
+  vendorId Vendor-ID DEFAULT 10415,
+  data     ENUMERATED {
+         initial_request (0)
+        , pcscf_restoration (2)
+        , update_request (1)
+        }
+ }
+
+ Extended-Max-Requested-BW-DL ::= [UNIVERSAL 554] SEQUENCE {
+ avpFlags AVP-Flags DEFAULT {v_bit TRUE, m_bit FALSE, p_bit FALSE},
+  vendorId Vendor-ID DEFAULT 10415,
+  data     Unsigned32
+ }
+
+ Extended-Max-Requested-BW-UL ::= [UNIVERSAL 555] SEQUENCE {
+ avpFlags AVP-Flags DEFAULT {v_bit TRUE, m_bit FALSE, p_bit FALSE},
+  vendorId Vendor-ID DEFAULT 10415,
+  data     Unsigned32
+ }
+
+
+  AS-Answer ::= [UNIVERSAL 274] SEQUENCE {
+ 
+  fixed [0] SEQUENCE {
+   session_Id Session-Id
+  }
+  , required [1] SET {
+  origin_Host Origin-Host
+  ,origin_Realm Origin-Realm
+  }
+ , optional [2] SET {
+  dRMP DRMP OPTIONAL
+  ,result_Code Result-Code OPTIONAL
+  ,oC_Supported_Features OC-Supported-Features OPTIONAL
+  ,oC_OLR OC-OLR OPTIONAL
+  ,origin_State_Id Origin-State-Id OPTIONAL
+  ,error_Message Error-Message OPTIONAL
+  ,error_Reporting_Host Error-Reporting-Host OPTIONAL
+  ,failed_AVP Failed-AVP OPTIONAL
+  ,redirect_Host SET OF Redirect-Host  OPTIONAL
+  ,redirect_Host_Usage Redirect-Host-Usage OPTIONAL
+  ,redirect_Max_Cache_Time Redirect-Max-Cache-Time OPTIONAL
+  ,proxy_Info SET OF Proxy-Info  OPTIONAL
+  }
+ 
+ }
+
+ AS-Request ::= [UNIVERSAL 274] SEQUENCE {
+ 
+  fixed [0] SEQUENCE {
+   session_Id Session-Id
+  }
+  , required [1] SET {
+  origin_Host Origin-Host
+  ,origin_Realm Origin-Realm
+  ,destination_Realm Destination-Realm
+  ,destination_Host Destination-Host
+  ,auth_Application_Id Auth-Application-Id
+  ,abort_Cause Abort-Cause
+  }
+ , optional [2] SET {
+  dRMP DRMP OPTIONAL
+  ,oC_Supported_Features OC-Supported-Features OPTIONAL
+  ,origin_State_Id Origin-State-Id OPTIONAL
+  ,proxy_Info SET OF Proxy-Info  OPTIONAL
+  ,route_Record SET OF Route-Record  OPTIONAL
+  }
+ 
+ }
+
+ ST-Answer ::= [UNIVERSAL 275] SEQUENCE {
+ 
+  fixed [0] SEQUENCE {
+   session_Id Session-Id
+  }
+  , required [1] SET {
+  origin_Host Origin-Host
+  ,origin_Realm Origin-Realm
+  }
+ , optional [2] SET {
+  dRMP DRMP OPTIONAL
+  ,result_Code Result-Code OPTIONAL
+  ,error_Message Error-Message OPTIONAL
+  ,error_Reporting_Host Error-Reporting-Host OPTIONAL
+  ,oC_Supported_Features OC-Supported-Features OPTIONAL
+  ,oC_OLR OC-OLR OPTIONAL
+  ,failed_AVP Failed-AVP OPTIONAL
+  ,sponsored_Connectivity_Data Sponsored-Connectivity-Data OPTIONAL
+  ,origin_State_Id Origin-State-Id OPTIONAL
+  ,3GPP_User_Location_Info 3GPP-User-Location-Info OPTIONAL
+  ,user_Location_Info_Time User-Location-Info-Time OPTIONAL
+  ,3GPP_MS_TimeZone 3GPP-MS-TimeZone OPTIONAL
+  ,rAN_NAS_Release_Cause SET OF RAN-NAS-Release-Cause  OPTIONAL
+  ,3GPP_SGSN_MCC_MNC 3GPP-SGSN-MCC-MNC OPTIONAL
+  ,tWAN_Identifier TWAN-Identifier OPTIONAL
+  ,tCP_Source_Port TCP-Source-Port OPTIONAL
+  ,uDP_Source_Port UDP-Source-Port OPTIONAL
+  ,uE_Local_IP_Address UE-Local-IP-Address OPTIONAL
+  ,netLoc_Access_Support NetLoc-Access-Support OPTIONAL
+  ,class SET OF Class  OPTIONAL
+  ,redirect_Host SET OF Redirect-Host  OPTIONAL
+  ,redirect_Host_Usage Redirect-Host-Usage OPTIONAL
+  ,redirect_Max_Cache_Time Redirect-Max-Cache-Time OPTIONAL
+  ,proxy_Info SET OF Proxy-Info  OPTIONAL
+  ,load SET OF Load  OPTIONAL
+  }
+ 
+ }
+
+ ST-Request ::= [UNIVERSAL 275] SEQUENCE {
+ 
+  fixed [0] SEQUENCE {
+   session_Id Session-Id
+  }
+  , required [1] SET {
+  origin_Host Origin-Host
+  ,origin_Realm Origin-Realm
+  ,destination_Realm Destination-Realm
+  ,auth_Application_Id Auth-Application-Id
+  ,termination_Cause Termination-Cause
+  }
+ , optional [2] SET {
+  dRMP DRMP OPTIONAL
+  ,destination_Host Destination-Host OPTIONAL
+  ,oC_Supported_Features OC-Supported-Features OPTIONAL
+  ,required_Access_Info SET OF Required-Access-Info  OPTIONAL
+  ,class SET OF Class  OPTIONAL
+  ,origin_State_Id Origin-State-Id OPTIONAL
+  ,proxy_Info SET OF Proxy-Info  OPTIONAL
+  ,route_Record SET OF Route-Record  OPTIONAL
+  }
+ 
+ }
+
+ RA-Answer ::= [UNIVERSAL 258] SEQUENCE {
+ 
+  fixed [0] SEQUENCE {
+   session_Id Session-Id
+  }
+  , required [1] SET {
+  origin_Host Origin-Host
+  ,origin_Realm Origin-Realm
+  }
+ , optional [2] SET {
+  dRMP DRMP OPTIONAL
+  ,result_Code Result-Code OPTIONAL
+  ,experimental_Result Experimental-Result OPTIONAL
+  ,oC_Supported_Features OC-Supported-Features OPTIONAL
+  ,oC_OLR OC-OLR OPTIONAL
+  ,media_Component_Description SET OF Media-Component-Description  OPTIONAL
+  ,service_URN Service-URN OPTIONAL
+  ,origin_State_Id Origin-State-Id OPTIONAL
+  ,class SET OF Class  OPTIONAL
+  ,error_Message Error-Message OPTIONAL
+  ,error_Reporting_Host Error-Reporting-Host OPTIONAL
+  ,redirect_Host SET OF Redirect-Host  OPTIONAL
+  ,redirect_Host_Usage Redirect-Host-Usage OPTIONAL
+  ,redirect_Max_Cache_Time Redirect-Max-Cache-Time OPTIONAL
+  ,failed_AVP Failed-AVP OPTIONAL
+  ,proxy_Info SET OF Proxy-Info  OPTIONAL
+  }
+ 
+ }
+
+ RA-Request ::= [UNIVERSAL 258] SEQUENCE {
+ 
+  fixed [0] SEQUENCE {
+   session_Id Session-Id
+  }
+  , required [1] SET {
+  origin_Host Origin-Host
+  ,origin_Realm Origin-Realm
+  ,destination_Realm Destination-Realm
+  ,destination_Host Destination-Host
+  ,auth_Application_Id Auth-Application-Id
+  ,specific_Action SET OF Specific-Action 
+  }
+ , optional [2] SET {
+  dRMP DRMP OPTIONAL
+  ,oC_Supported_Features OC-Supported-Features OPTIONAL
+  ,access_Network_Charging_Identifier SET OF Access-Network-Charging-Identifier  OPTIONAL
+  ,access_Network_Charging_Address Access-Network-Charging-Address OPTIONAL
+  ,aN_GW_Address SET (SIZE (0..2)) OF AN-GW-Address  OPTIONAL
+  ,aN_Trusted AN-Trusted OPTIONAL
+  ,flows SET OF Flows  OPTIONAL
+  ,subscription_Id SET OF Subscription-Id  OPTIONAL
+  ,abort_Cause Abort-Cause OPTIONAL
+  ,iP_CAN_Type IP-CAN-Type OPTIONAL
+  ,netLoc_Access_Support NetLoc-Access-Support OPTIONAL
+  ,rAT_Type RAT-Type OPTIONAL
+  ,sponsored_Connectivity_Data Sponsored-Connectivity-Data OPTIONAL
+  ,3GPP_User_Location_Info 3GPP-User-Location-Info OPTIONAL
+  ,user_Location_Info_Time User-Location-Info-Time OPTIONAL
+  ,3GPP_MS_TimeZone 3GPP-MS-TimeZone OPTIONAL
+  ,rAN_NAS_Release_Cause SET OF RAN-NAS-Release-Cause  OPTIONAL
+  ,3GPP_SGSN_MCC_MNC 3GPP-SGSN-MCC-MNC OPTIONAL
+  ,tWAN_Identifier TWAN-Identifier OPTIONAL
+  ,tCP_Source_Port TCP-Source-Port OPTIONAL
+  ,uDP_Source_Port UDP-Source-Port OPTIONAL
+  ,uE_Local_IP_Address UE-Local-IP-Address OPTIONAL
+  ,origin_State_Id Origin-State-Id OPTIONAL
+  ,class SET OF Class  OPTIONAL
+  ,proxy_Info SET OF Proxy-Info  OPTIONAL
+  ,route_Record SET OF Route-Record  OPTIONAL
+  }
+ 
+ }
+
+ AA-Answer ::= [UNIVERSAL 265] SEQUENCE {
+ 
+  fixed [0] SEQUENCE {
+   session_Id Session-Id
+  }
+  , required [1] SET {
+  auth_Application_Id Auth-Application-Id
+  ,origin_Host Origin-Host
+  ,origin_Realm Origin-Realm
+  }
+ , optional [2] SET {
+  dRMP DRMP OPTIONAL
+  ,result_Code Result-Code OPTIONAL
+  ,experimental_Result Experimental-Result OPTIONAL
+  ,auth_Session_State Auth-Session-State OPTIONAL
+  ,access_Network_Charging_Identifier SET OF Access-Network-Charging-Identifier  OPTIONAL
+  ,access_Network_Charging_Address Access-Network-Charging-Address OPTIONAL
+  ,acceptable_Service_Info Acceptable-Service-Info OPTIONAL
+  ,aN_GW_Address SET (SIZE (0..2)) OF AN-GW-Address  OPTIONAL
+  ,aN_Trusted AN-Trusted OPTIONAL
+  ,service_Authorization_Info Service-Authorization-Info OPTIONAL
+  ,iP_CAN_Type IP-CAN-Type OPTIONAL
+  ,netLoc_Access_Support NetLoc-Access-Support OPTIONAL
+  ,rAT_Type RAT-Type OPTIONAL
+  ,flows SET OF Flows  OPTIONAL
+  ,oC_Supported_Features OC-Supported-Features OPTIONAL
+  ,oC_OLR OC-OLR OPTIONAL
+  ,supported_Features SET OF Supported-Features  OPTIONAL
+  ,subscription_Id SET OF Subscription-Id  OPTIONAL
+  ,user_Equipment_Info User-Equipment-Info OPTIONAL
+  ,3GPP_SGSN_MCC_MNC 3GPP-SGSN-MCC-MNC OPTIONAL
+  ,class SET OF Class  OPTIONAL
+  ,error_Message Error-Message OPTIONAL
+  ,error_Reporting_Host Error-Reporting-Host OPTIONAL
+  ,failed_AVP Failed-AVP OPTIONAL
+  ,retry_Interval Retry-Interval OPTIONAL
+  ,origin_State_Id Origin-State-Id OPTIONAL
+  ,redirect_Host SET OF Redirect-Host  OPTIONAL
+  ,redirect_Host_Usage Redirect-Host-Usage OPTIONAL
+  ,redirect_Max_Cache_Time Redirect-Max-Cache-Time OPTIONAL
+  ,proxy_Info SET OF Proxy-Info  OPTIONAL
+  ,load SET OF Load  OPTIONAL
+  }
+ 
+ }
+
+ AA-Request ::= [UNIVERSAL 265] SEQUENCE {
+ 
+  fixed [0] SEQUENCE {
+   session_Id Session-Id
+  }
+  , required [1] SET {
+  auth_Application_Id Auth-Application-Id
+  ,origin_Host Origin-Host
+  ,origin_Realm Origin-Realm
+  ,destination_Realm Destination-Realm
+  }
+ , optional [2] SET {
+  dRMP DRMP OPTIONAL
+  ,destination_Host Destination-Host OPTIONAL
+  ,iP_Domain_Id IP-Domain-Id OPTIONAL
+  ,auth_Session_State Auth-Session-State OPTIONAL
+  ,aF_Application_Identifier AF-Application-Identifier OPTIONAL
+  ,media_Component_Description SET OF Media-Component-Description  OPTIONAL
+  ,service_Info_Status Service-Info-Status OPTIONAL
+  ,aF_Charging_Identifier AF-Charging-Identifier OPTIONAL
+  ,sIP_Forking_Indication SIP-Forking-Indication OPTIONAL
+  ,specific_Action SET OF Specific-Action  OPTIONAL
+  ,subscription_Id SET OF Subscription-Id  OPTIONAL
+  ,oC_Supported_Features OC-Supported-Features OPTIONAL
+  ,supported_Features SET OF Supported-Features  OPTIONAL
+  ,reservation_Priority Reservation-Priority OPTIONAL
+  ,framed_IP_Address Framed-IP-Address OPTIONAL
+  ,framed_Ipv6_Prefix Framed-Ipv6-Prefix OPTIONAL
+  ,called_Station_Id Called-Station-Id OPTIONAL
+  ,service_URN Service-URN OPTIONAL
+  ,sponsored_Connectivity_Data Sponsored-Connectivity-Data OPTIONAL
+  ,mPS_Identifier MPS-Identifier OPTIONAL
+  ,gCS_Identifier GCS-Identifier OPTIONAL
+  ,mCPTT_Identifier MCPTT-Identifier OPTIONAL
+  ,rx_Request_Type Rx-Request-Type OPTIONAL
+  ,required_Access_Info SET OF Required-Access-Info  OPTIONAL
+  ,aF_Requested_Data AF-Requested-Data OPTIONAL
+  ,reference_Id Reference-Id OPTIONAL
+  ,pre_emption_Control_Info Pre-emption-Control-Info OPTIONAL
+  ,origin_State_Id Origin-State-Id OPTIONAL
+  ,proxy_Info SET OF Proxy-Info  OPTIONAL
+  ,route_Record SET OF Route-Record  OPTIONAL
+  }
+ 
+ }
+
+ END
+ 

@@ -1,0 +1,413 @@
+<AA-Request> ::= <Diameter-Header: 265, REQ, PXY >
+<Session-Id >
+[DRMP ]
+{Auth-Application-Id }
+{Origin-Host }
+{Origin-Realm }
+{Destination-Realm }
+[Destination-Host ]
+[IP-Domain-Id ]
+[Auth-Session-State ]
+[AF-Application-Identifier ]
+*[ Media-Component-Description ]
+[ Service-Info-Status ]
+[ AF-Charging-Identifier ]
+[ SIP-Forking-Indication ]
+*[ Specific-Action ]
+*[ Subscription-Id ]
+[ OC-Supported-Features ]
+*[ Supported-Features ]
+[ Reservation-Priority ]
+[ Framed-IP-Address ]
+[ Framed-Ipv6-Prefix ]
+[ Called-Station-Id ]
+[ Service-URN ]
+[ Sponsored-Connectivity-Data ]
+[ MPS-Identifier ]
+[ GCS-Identifier ]
+[ MCPTT-Identifier ]
+[ Rx-Request-Type ]
+*[ Required-Access-Info ]
+[AF-Requested-Data ]
+[ Reference-Id ]
+[ Pre-emption-Control-Info ]
+[ Origin-State-Id ]
+*[ Proxy-Info ]
+*[ Route-Record ]
+*[ AVP ]
+
+<AA-Answer> ::= <Diameter-Header: 265, PXY >
+<        Session-Id >
+[        DRMP ]
+{        Auth-Application-Id }
+{        Origin-Host }
+{        Origin-Realm }
+[        Result-Code ]
+[        Experimental-Result ]
+[        Auth-Session-State ]
+*[       Access-Network-Charging-Identifier ]
+[        Access-Network-Charging-Address ]
+[        Acceptable-Service-Info ]
+0*2[     AN-GW-Address ]
+[        AN-Trusted ]
+[        Service-Authorization-Info ]
+[        IP-CAN-Type ]
+[        NetLoc-Access-Support ]
+[        RAT-Type ]
+*[       Flows ]
+[        OC-Supported-Features ]
+[        OC-OLR ]
+*[       Supported-Features ]
+*[       Subscription-Id ]
+[        User-Equipment-Info ]
+[        3GPP-SGSN-MCC-MNC ]
+*[       Class ]
+[        Error-Message ]
+[        Error-Reporting-Host ]
+[        Failed-AVP ]
+[        Retry-Interval ]
+[        Origin-State-Id ]
+*[       Redirect-Host ]
+[        Redirect-Host-Usage ]
+[        Redirect-Max-Cache-Time ]
+*[       Proxy-Info ]
+*[       Load ]
+*[       AVP ]
+
+<RA-Request> ::= <Diameter-Header: 258, REQ, PXY >
+<      Session-Id >
+[      DRMP ]
+{      Origin-Host }
+{      Origin-Realm }
+{      Destination-Realm }
+{      Destination-Host }
+{      Auth-Application-Id }
+*{     Specific-Action }
+[      OC-Supported-Features ]
+*[     Access-Network-Charging-Identifier ]
+[      Access-Network-Charging-Address ]
+0*2[   AN-GW-Address ]
+[      AN-Trusted ]
+*[     Flows ]
+*[     Subscription-Id ]
+[      Abort-Cause ]
+[      IP-CAN-Type ]
+[      NetLoc-Access-Support ]
+[      RAT-Type ]
+[      Sponsored-Connectivity-Data ]
+[      3GPP-User-Location-Info ]
+[      User-Location-Info-Time ]
+[      3GPP-MS-TimeZone ]
+*[     RAN-NAS-Release-Cause ]
+[      3GPP-SGSN-MCC-MNC ]
+[      TWAN-Identifier ]
+[      TCP-Source-Port ]
+[      UDP-Source-Port ]
+[      UE-Local-IP-Address ]
+[      Origin-State-Id ]
+*[     Class ]
+*[     Proxy-Info ]
+*[     Route-Record ]
+*[     AVP ]
+
+<RA-Answer> ::= <Diameter-Header: 258, PXY >
+<   Session-Id >
+[   DRMP ]
+{   Origin-Host }
+{   Origin-Realm }
+[   Result-Code ]
+[   Experimental-Result ]
+[   OC-Supported-Features ]
+[   OC-OLR ]
+*[  Media-Component-Description ]
+[   Service-URN ]
+[   Origin-State-Id ]
+*[  Class ]
+[   Error-Message ]
+[   Error-Reporting-Host ]
+*[  Redirect-Host ]
+[   Redirect-Host-Usage ]
+[   Redirect-Max-Cache-Time ]
+[   Failed-AVP ]
+*[  Proxy-Info ]
+*[  AVP ]
+
+<ST-Request> ::= <Diameter-Header: 275, REQ, PXY >
+< Session-Id >
+[   DRMP ]
+{   Origin-Host }
+{   Origin-Realm }
+{   Destination-Realm }
+{   Auth-Application-Id }
+{   Termination-Cause }
+[   Destination-Host ]
+[   OC-Supported-Features ]
+*[  Required-Access-Info ]
+*[  Class ]
+[   Origin-State-Id ]
+*[  Proxy-Info ]
+*[  Route-Record ]
+*[  AVP ]
+
+<ST-Answer> ::= <Diameter-Header: 275, PXY >
+<   Session-Id >
+[   DRMP ]
+{   Origin-Host }
+{   Origin-Realm }
+[   Result-Code ]
+[   Error-Message ]
+[   Error-Reporting-Host ]
+[   OC-Supported-Features ]
+[   OC-OLR ]
+[   Failed-AVP ]
+[   Sponsored-Connectivity-Data ]
+[   Origin-State-Id ]
+[   3GPP-User-Location-Info ]
+[   User-Location-Info-Time ]
+[   3GPP-MS-TimeZone ]
+*[  RAN-NAS-Release-Cause ]
+[   3GPP-SGSN-MCC-MNC ]
+[   TWAN-Identifier ]
+[   TCP-Source-Port ]
+[   UDP-Source-Port ]
+[   UE-Local-IP-Address ]
+[   NetLoc-Access-Support ]
+*[  Class ]
+*[  Redirect-Host ]
+[   Redirect-Host-Usage ]
+[   Redirect-Max-Cache-Time ]
+*[  Proxy-Info ]
+*[  Load ]
+*[  AVP ]
+
+<AS-Request> ::= <Diameter-Header: 274, REQ, PXY >
+< Session-Id >
+[ DRMP ]
+{ Origin-Host }
+{ Origin-Realm }
+{ Destination-Realm }
+{ Destination-Host }
+{ Auth-Application-Id }
+[ OC-Supported-Features ]
+{ Abort-Cause }
+[ Origin-State-Id ]
+*[ Proxy-Info ]
+*[ Route-Record ]
+*[ AVP ]
+
+
+<AS-Answer> ::= <Diameter-Header: 274, PXY >
+<   Session-Id >
+[   DRMP ]
+{   Origin-Host }
+{   Origin-Realm }
+[   Result-Code ]
+[   OC-Supported-Features ]
+[   OC-OLR ]
+[   Origin-State-Id ]
+[   Error-Message ]
+[   Error-Reporting-Host ]
+[   Failed-AVP ]
+*[  Redirect-Host ]
+[   Redirect-Host-Usage ]
+[   Redirect-Max-Cache-Time ]
+*[  Proxy-Info ]
+*[  AVP ]
+
+Abort-Cause ::= <AVP-Enumerated: 500 >
+<BEARER-RELEASED                        >
+<INSUFFICIENT-SERVER-RESOURCES          >
+<INSUFFICIENT-BEARER-RESOURCES          >
+<PS-TO-CS-HANDOVER                      >
+<SPONSORED-DATA-CONNECTIVITY-DISALLOWED>
+
+Access-Network-Charging-Identifier ::= <AVP-Header: 502 >
+{ Access-Network-Charging-Identifier-Value}
+*[ Flows ]
+
+Flows ::= <AVP-Header: 510 >
+{Media-Component-Number}
+*[Flow-Number]
+*[ Content-Version ]
+[Final-Unit-Action]
+[Media-Component-Status]
+*[AVP]
+
+Flow-Status ::= <AVP-Enumerated: 511 >
+<ENABLED-UPLINK  >
+<ENABLED-DOWNLINK>
+<ENABLED         >
+<DISABLED        >
+<REMOVED         >
+
+Flow-Usage ::= <AVP-Enumerated: 512 >
+<NO-INFORMATION>
+<RTCP          >
+<AF-SIGNALLING >
+
+Specific-Action ::= <AVP-Enumerated: 513 >
+<VOID-0                                       >
+<CHARGING-CORRELATION-EXCHANGE                >
+<INDICATION-OF-LOSS-OF-BEARER                 >
+<INDICATION-OF-RECOVERY-OF-BEARER             >
+<INDICATION-OF-RELEASE-OF-BEARER              >
+<VOID-5                                       >
+<IP-CAN-CHANGE                                >
+<INDICATION-OF-OUT-OF-CREDIT                  >
+<INDICATION-OF-SUCCESSFUL-RESOURCES-ALLOCATION>
+<INDICATION-OF-FAILED-RESOURCES-ALLOCATION    >
+<INDICATION-OF-LIMITED-PCC-DEPLOYMENT         >
+<USAGE-REPORT                                 >
+<ACCESS-NETWORK-INFO-REPORT                         >
+<INDICATION-OF-RECOVERY-FROM-LIMITED-PCC-DEPLOYMENT >
+<INDICATION-OF-ACCESS-NETWORK-INFO-REPORTING-FAILURE>
+<INDICATION-OF-TRANSFER-POLICY-EXPIRED              >
+<PLMN-CHANGE                                        >
+
+Media-Component-Description ::= <AVP-Header: 517 >
+{ Media-Component-Number }
+*[ Media-Sub-Component ]
+[ AF-Application-Identifier ]
+[ Media-Type ]
+[ Max-Requested-Bandwidth-UL ]
+[ Max-Requested-Bandwidth-DL ]
+[ Max-Supported-Bandwidth-UL ]
+[ Max-Supported-Bandwidth-DL ]
+[ Min-Desired-Bandwidth-UL ]
+[ Min-Desired-Bandwidth-DL ]
+[ Min-Requested-Bandwidth-UL ]
+[ Min-Requested-Bandwidth-DL ]
+[ Flow-Status ]
+[ Priority-Sharing-Indicator ]
+[ Pre-emption-Capability ]
+[ Pre-emption-Vulnerability ]
+[ Reservation-Priority ]
+[ RS-Bandwidth ]
+[ RR-Bandwidth ]
+*[ Codec-Data ]
+[ Sharing-Key-DL ]
+[ Sharing-Key-UL ]
+[ Content-Version ]
+*[ AVP ]
+
+Media-Sub-Component ::= <AVP-Header: 519 >
+{ Flow-Number }
+0*2 [ Flow-Description ]
+[ Flow-Status ]
+[Flow-Usage ]
+[Max-Requested-Bandwidth-UL ]
+[Max-Requested-Bandwidth-DL ]
+[AF-Signalling-Protocol ]
+[ToS-Traffic-Class ]
+*[AVP ]
+
+Media-Type ::= <AVP-Enumerated: 520 >
+<AUDIO       >
+<VIDEO       >
+<DATA        >
+<APPLICATION >
+<CONTROL     >
+<TEXT        >
+<MESSAGE     >
+<OTHER       >
+
+SIP-Forking-Indication ::= <AVP-Enumerated: 523 >
+<SINGLE-DIALOGUE  >
+<SEVERAL-DIALOGUES>
+
+Acceptable-Service-Info::= <AVP-Header: 526 >
+*[Media-Component-Description]
+[ Max-Requested-Bandwidth-DL ]
+[ Max-Requested-Bandwidth-UL ]
+*[AVP ]
+
+Service-Info-Status ::= <AVP-Enumerated: 527 >
+<FINAL-SERVICE-INFORMATION      >
+<PRELIMINARY-SERVICE-INFORMATION>
+
+AF-Signalling-Protocol ::= <AVP-Enumerated: 529 >
+<NO-INFORMATION>
+<SIP>
+
+Sponsored-Connectivity-Data ::= <AVP-Header: 530 >
+[Sponsor-Identity ]
+[Application-Service-Provider-Identity ]
+[Granted-Service-Unit ]
+[Used-Service-Unit ]
+[Sponsoring-Action ]
+*[AVP ]
+
+Rx-Request-Type ::= <AVP-Enumerated: 533 >
+<INITIAL-REQUEST  >
+<UPDATE-REQUEST   >
+<PCSCF-RESTORATION>
+
+Required-Access-Info ::= <AVP-Enumerated: 536 >
+<USER-LOCATION>
+<MS-TIME-ZONE>
+
+Sponsoring-Action ::= <AVP-Enumerated: 542 >
+<DISABLE-SPONSORING>
+<ENABLE-SPONSORING>
+
+Priority-Sharing-Indicator ::= <AVP-Enumerated: 550 >
+<PRIORITY-SHARING-ENABLED>
+<PRIORITY-SHARING-DISABLED>
+
+Media-Component-Status ::= <AVP-Enumerated: 549 >
+<ACTIVE>
+<INACTIVE>
+
+Dime-load-03 ::= <AVP-Import>
+<Load>
+
+Rfc-4005 ::= <AVP-Import>
+<Called-Station-Id  >
+<Framed-IP-Address  >
+<Framed-Ipv6-Prefix >
+
+Rfc-4006 ::= <AVP-Import>
+<Final-Unit-Action     >
+< Granted-Service-Unit >
+< Subscription-Id      >
+< Used-Service-Unit    >
+< User-Equipment-Info  >
+
+Rfc-7683 ::= <AVP-Import>
+<OC-OLR>
+<OC-Supported-Features>
+
+Rfc-7944 ::= <AVP-Import>
+<DRMP>
+
+ThreeGPP-183-017 ::= <AVP-Import>
+<Reservation-Priority>
+
+ThreeGPP-29-061 ::= <AVP-Import>
+<3GPP-MS-TimeZone        >
+< 3GPP-SGSN-MCC-MNC      >
+< 3GPP-User-Location-Info>
+< TWAN-Identifier        >
+
+ThreeGPP-29-154 ::= <AVP-Import>
+<Reference-Id>
+
+ThreeGPP-29-212 ::= <AVP-Import>
+<AN-GW-Address             >
+< IP-CAN-Type              >
+< NetLoc-Access-Support    >
+< Pre-emption-Capability   >
+< Pre-emption-Vulnerability>
+< RAN-NAS-Release-Cause    >
+< RAT-Type                 >
+< TCP-Source-Port          >
+< ToS-Traffic-Class        >
+< UDP-Source-Port          >
+< UE-Local-IP-Address      >
+< User-Location-Info-Time  >
+
+ThreeGPP-29-229 ::= <AVP-Import>
+<Supported-Features>
+
+ThreeGPP-29-273 ::= <AVP-Import>
+<AN-Trusted>
